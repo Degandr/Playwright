@@ -1,13 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
+import { Frame_Page } from "../Pages/frame_page";
 
 test.describe("Frame", () => {
   test("Get text from Frame", async ({ page }) => {
-    await page.goto("https://the-internet.herokuapp.com/frames");
-    await page.locator('[href="/iframe"]').click();
-    const frame1 = page.frames();
-    if (frame1 != null) {
-      const elemInFrame = await frame1[0].getByText("Your content goes here.");
-      await expect(elemInFrame).toContainText(/Your content goes here.*/);
-    } else throw new Error("No such Frame");
+    const framePage = new Frame_Page(page);
+    await framePage.goto();
+    await framePage.goToIFramePage();
+    await framePage.elemInFrameHasText(/Your content goes here.*/);
   });
 });

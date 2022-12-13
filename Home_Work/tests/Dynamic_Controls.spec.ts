@@ -1,15 +1,14 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
+import { Dynamic_Control_Page } from "../Pages/dynamic_control_page";
 
 test.describe("Dynamic Controls", () => {
   test("CheckBox Removing", async ({ page }) => {
-    await page.goto("https://the-internet.herokuapp.com/dynamic_controls");
-    const checkbox = page.locator('//*/input[@label="blah"]');
-    const removeButton = page.locator('(//*/button[@type="button"])[1]');
-    await expect(checkbox).toBeVisible({ timeout: 1000 });
-    await expect(removeButton).toBeEnabled({ timeout: 1000 });
-    await removeButton.click();
-    await expect(removeButton).toBeDisabled({ timeout: 1000 });
-    const text = page.locator('//*/p[@id="message"]');
-    await expect(text).toHaveText(/It's gone!.*/);
+    const dynamicControl = new Dynamic_Control_Page(page);
+    await dynamicControl.goto();
+    await dynamicControl.checkBoxDefault();
+    await dynamicControl.removeButtonDefault();
+    await dynamicControl.removeButtonClick();
+    await dynamicControl.removeButtonAfterClick();
+    await dynamicControl.textAfterRemoving(/It's gone!.*/);
   });
 });

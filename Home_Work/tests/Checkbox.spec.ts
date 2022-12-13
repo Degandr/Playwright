@@ -1,15 +1,15 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
+import { Checkbox_Page } from "../Pages/checkbox_page";
 
 test.describe("Checkbox", () => {
   test("Checkbox checking", async ({ page }) => {
-    await page.goto("https://the-internet.herokuapp.com/checkboxes");
-    const checkbox_1 = page.locator('(//*/form/input[@type="checkbox"])[1]');
-    const checkbox_2 = page.locator('(//*/form/input[@type="checkbox"])[2]');
-    await expect(checkbox_1).toBeChecked({ checked: false });
-    await expect(checkbox_2).toBeChecked({ checked: true });
-    await checkbox_1.click();
-    await checkbox_2.click();
-    await expect(checkbox_1).toBeChecked({ checked: true });
-    await expect(checkbox_2).toBeChecked({ checked: false });
+    const checkBoxPage = new Checkbox_Page(page);
+    await checkBoxPage.goto();
+    await checkBoxPage.checkBox_1_State(false);
+    await checkBoxPage.checkBox_2_State(true);
+    await checkBoxPage.clickFirstCheckBox();
+    await checkBoxPage.clickSecondCheckBox();
+    await checkBoxPage.checkBox_1_State(true);
+    await checkBoxPage.checkBox_2_State(false);
   });
 });
