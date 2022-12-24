@@ -8,7 +8,9 @@
     "lint": "eslint **/*.{ts,json}",
     "lint:fix": "eslint **/*.{ts,json} --quiet --fix",
     "prepare": "husky install",
-    "playwright": "npx playwright test Home_Work/tests --headed"
+    "playwright": "npx playwright test Home_Work/tests --headed",
+    "allure:reporter": "npx allure generate ./allure-results --clean",
+    "allure:open": "npx allure open ./allure-report"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,8 @@
     "@types/selenium-webdriver": "^4.1.9",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "allure-commandline": "^2.20.1",
+    "allure-playwright": "^2.0.0-beta.21",
     "chromedriver": "^107.0.3",
     "eslint": "8.22.0",
     "eslint-config-prettier": "^8.5.0",
